@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html >
+  <head>
+    <title>Rock Paper Scissor Game</title>
+    <meta charset="UTF-8"/>
+  </head>
+  <body>
+    <script>
+      function random()
+      {
+        return Math.floor(Math.random()*3);
+      }
+      let x=random();
+      let playerone;
+      let computerone='Rock';
+      arr=['Rock','Paper','Scissor']
+      function computerplay()
+      {
+        return arr[x];
+      }
+
+
+
+      function round(playerselection,computerselection)
+      {
+        let a=playerselection.toLowerCase();
+        let b=computerselection.toLowerCase();
+        if((a==='rock' && b==='rock')||(a==='paper' && b==='paper')||(a==='scissor' && b==='scissor'))
+        alert("It's a Tie");
+        else if((a==='rock' && b==='paper') ||(a==='scissor' && b==='rock') ||(a==='paper' && b==='scissor'))
+        alert(`You Lose! ${playerselection} beaten by ${computerselection}`);
+        else alert(`You Win! ${playerselection} beats ${computerselection}`);
+
+      }
+      let t='Y';
+
+      function times()
+      {
+
+        while(t==='Y')
+        {
+          playerone=prompt('Enter your choice',);
+          x=random();
+          computerone=computerplay();
+          round(playerone,computerone);
+          t=prompt("Do you want to play Again? Y for yes , N for no",);
+        }
+      }
+      times();
+
+
+
+    </script>
+  </body>
+</html>
