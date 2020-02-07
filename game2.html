@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Rock Paper Scissor game</title>
+    <link href="game2style.css" rel="stylesheet">
+
+  </head>
+  <body>
+    <div class="main-content">
+      <h1>Game</h1>
+      <p id="playerScore"></p>
+      <p id="computerScore"></p>
+      <button id="rock"> Rock</button>
+      <button id="paper"> Paper</button>
+      <button id="scissor"> Scissor</button>
+      <p id="compChoice"></p>
+      <p id="pChoice"></p>
+      <p id="result"></p>
+      <p id="end"></p>
+    </div>
+    <script>
+    let rockselected=document.querySelector("#rock");
+    let paperselected=document.querySelector("#paper");
+    let scissorselected=document.querySelector("#scissor");
+    let allButtons=document.querySelectorAll('button');
+
+
+    function random()
+    {
+      return Math.floor(Math.random()*3);
+    }
+    arr=['Rock','Paper','Scissor'];
+    function computerPlay()
+    {
+      return arr[random()];
+    }
+    let computerChoice=computerPlay();
+    let playerChoice;
+    let pScore=0;//playerscore
+    let cScore=0;//computerscoreh
+    function round(playerChoice,computerChoice)
+    {
+      let a=playerChoice.toLowerCase();
+      let b=computerChoice.toLowerCase();
+      let z=document.querySelector("#result");
+      if((a==='rock' && b==='rock')||(a==='paper' && b==='paper')||(a==='scissor' && b==='scissor'))
+      z.textContent="It's a draw.";
+
+      else if((a==='rock' && b==='paper') ||(a==='scissor' && b==='rock') ||(a==='paper' && b==='scissor'))
+        {
+          cScore++;
+        z.textContent="Computer Wins";
+      }
+      else {
+        {
+          pScore++;
+          z.textContent="Player Wins";
+        }
+        }
+
+    }
+
+    function updateScores()
+    {
+      let x=document.querySelector("#playerScore");
+      x.textContent=`Player Score: ${pScore}`;
+      let y=document.querySelector("#computerScore");
+      y.textContent=`Computer Score: ${cScore}`;
+      let z=document.querySelector("#compChoice");
+      z.textContent=`Computer Selected ${computerChoice}`;
+
+      let w=document.querySelector("#pChoice");
+      w.textContent=`Player Selected ${playerChoice}`;
+
+    }
+
+    function endResult()
+    {
+      let x=document.querySelector("#end")
+
+      if(pScore===5){
+        x.textContent="The game is yours. You are the ultimate winner";
+
+      allButtons.forEach((allButton) =>{
+        /*
+        this could have also be used to give player playerselection
+          playerChoice=allButton.id;
+          console.log(playerChoice);
+*/
+        allButton.disabled=true;
+      });
+    }
+      else if(cScore===5)
+      {
+        x.textContent="You have lost this battle.Computer has won this time";
+        allButtons.forEach((allButton) =>{
+
+
+            /*
+            this could have also be used to give player playerselection
+              playerChoice=allButton.id;
+              console.log(playerChoice);
+    */
+
+          allButton.disabled=true;
+        });
+      }
+    }
+    function game()
+    {
+      computerChoice=computerPlay();
+      round(playerChoice,computerChoice);
+      updateScores();
+      endResult();
+    }
+
+    rockselected.addEventListener('click',(e)=>{
+    playerChoice = 'rock';
+    game();
+})
+
+paperselected.addEventListener('click',(e)=>{
+    playerChoice = 'paper';
+    game();
+})
+
+scissorselected.addEventListener('click',(e)=>{
+    playerChoice = 'scissor'
+    game();
+})
+
+    </script>
+  </body>
+</html>
